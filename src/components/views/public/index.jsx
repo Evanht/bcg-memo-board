@@ -1,15 +1,26 @@
 // Public routing
 import React from 'react'
+import PropTypes from 'prop-types'
+import { noop } from 'lodash'
 import { Route, Switch } from 'react-router-dom'
 
-const Test = () => (
-  <h1>Public routing</h1>
-)
+import Authentication from './authentication'
 
-const Public = () => (
-  <Switch>
-    <Route path="/" component={Test} />
-  </Switch>
-)
+const Public = (props) => {
+  return (
+    <Switch>
+      <Route path="/" component={() => <Authentication {...props} />} />
+    </Switch>
+  )
+}
+
+Public.propTypes = {
+  toggleLoggedIn: PropTypes.func,
+}
+
+Public.defaultProps = {
+  toggleLoggedIn: noop,
+}
+
 
 export default Public
