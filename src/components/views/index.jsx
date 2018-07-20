@@ -19,9 +19,12 @@ class App extends Component {
     this.state = {
       isLoggedIn: false,
     }
+
+    this.toggleLoggedIn = this.toggleLoggedIn.bind(this)
   }
 
   componentDidMount() {
+    // Try to autheticate using token in localStorage
     api.authenticate()
       .then(({ accessToken }) => {
         api.passport.verifyJWT(accessToken)
@@ -31,6 +34,13 @@ class App extends Component {
           .catch(err => console.log(err))
       })
       .catch(err => console.log(`Not logged in mate: ${err}`))
+  }
+
+  toggleLoggedIn() {
+    console.log("Logging in")
+    this.setState({
+      isLoggedIn: !this.state.isLoggedIn,
+    })
   }
 
   render() {
@@ -43,7 +53,7 @@ class App extends Component {
               if (this.state.isLoggedIn) {
                 return <Private />
               }
-              return <Public />
+              return <Public toggleLoggedIn={this.toggleLoggedIn} />
             }}
           />
         </Switch>
