@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { noop } from 'lodash'
 
 import api from 'service/api'
-import { Inputs, Typography, Button } from 'components/ui'
+import { Inputs, Typography, Button, Icon } from 'components/ui'
 
 const { Text } = Inputs
 const { Headers } = Typography
@@ -67,6 +67,7 @@ class Login extends Component {
             })}
             placeholder="email"
             htmlType="email"
+            prefix={<Icon type="mail" />}
           />
         </FormItem>
         <FormItem>
@@ -76,6 +77,7 @@ class Login extends Component {
             })}
             placeholder="********"
             type="password"
+            prefix={<Icon type="lock" />}
           />
         </FormItem>
         <FormItem>
