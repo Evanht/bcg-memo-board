@@ -2,13 +2,11 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-const Test = () => (
-  <h1>Private routing</h1>
-)
+import Ideas from './ideas'
 
 const Private = () => (
   <Switch>
-    <Route path="/" component={Test} />
+    <Route path="/" component={Ideas} />
   </Switch>
 )
 
