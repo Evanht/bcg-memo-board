@@ -12,8 +12,7 @@ const api = feathers()
   .configure(socketio(socket))
   .configure(auth({ storage }))
 
-// export const users = api.service('users')
-// export const platforms = api.service('platforms')
-// export const connections = api.service('connections')
+export const users = api.service('users')
+export const ideas = api.service('ideas')
 
 export default api

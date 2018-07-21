@@ -1,3 +1,4 @@
 import Message from './message'
+import Spin from './spin'
 
-export default { Message }
+export default { Message, Spin }

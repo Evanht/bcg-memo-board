@@ -1,9 +1,9 @@
 const colors = {
-  bcgPurple: '#446DF6',
+  bcgPurple: '#4771F2',
   bcgOrange: '#F89777',
   bcgGreen: '#00DBBA',
-  bcgRedDark: '#FC4E51',
-  bcgRed: '#D75A4A',
+  bcgPurpleDark: '#2c56d7',
+  bcgRed: '#da4937',
   bcgBlue: '#226CE0',
   blue: 'rgb(46, 187, 253)',
   green: '#558B2F',
@@ -22,8 +22,8 @@ const colors = {
 
 export default {
   colors: {
-    primary: colors.bcgOrange,
-    primaryDark: colors.bcgRedDark,
+    primary: colors.bcgPurple,
+    primaryDark: colors.bcgPurpleDark,
     secondary: colors.bcgRed,
     info: colors.blue,
     success: colors.bcgGreen,
