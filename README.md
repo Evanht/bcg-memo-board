@@ -1,28 +1,34 @@
-# Use antd in create-react-app
+# Idea Board Web App
+As this is a simple project I used the create-react-app-antd boilerplate: https://github.com/ant-design/create-react-app-antd
 
-## Step by Step Documentation
+This app connects to an API to handle authentication and the creating, fetching, updating, and deleting of ideas.
 
-- English: https://ant.design/docs/react/use-with-create-react-app
-- 中文：https://ant.design/docs/react/use-with-create-react-app-cn
+## Getting Started
 
-## Preview
+1. Create a .env file in the project's root and set:
+`NODE_PATH=src/`
+This allows for absolute imports, rather than messy relative ones from deep down components.
 
+
+2. Install the packages and get going
 ```bash
 $ npm install
 $ npm start
 ```
 
-or:
-
-```bash
-$ yarn
-$ yarn start
+3. Connect the API
+```
+  Clone and run:  https://github.com/Evanht/bcg-memo-board-api
 ```
 
-## What more
+4. Visit localhost:3000 and try logging in to check that the API is connected
+```
+  email: evan@mail.com
+  password: verysecret
+```
 
-- [antd](http://github.com/ant-design/ant-design/)
-- [babel-plugin-import](http://github.com/ant-design/babel-plugin-import/)
-- [create-react-app](https://github.com/facebookincubator/create-react-app)
-- [react-app-rewired](https://github.com/timarney/react-app-rewired)
-- [less-loader](https://github.com/webpack/less-loader)
+## Tests
+Tests are written using Jest and Enzyme. To run the test suite:
+```bash
+$ CI=true npm test
+```  

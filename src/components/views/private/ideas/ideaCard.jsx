@@ -17,6 +17,8 @@ const IdeaCardWrapper = styled.div`
   margin: 10px;
   padding: 10px;
 `
+IdeaCardWrapper.displayName = 'IdeaCardWrapper'
+
 const StyledTextInput = styled(Text)`
   && {
     margin-bottom: 10px
@@ -31,6 +33,8 @@ const StyledTextInput = styled(Text)`
     border-radius: 3px;
   }
 `
+StyledTextInput.displayName = 'StyledTextInput'
+
 const StyledTextAreaInput = styled(Text.TextArea)`
   && {
     margin-bottom: 10px
@@ -46,6 +50,8 @@ const StyledTextAreaInput = styled(Text.TextArea)`
     border-radius: 3px;
   }
 `
+StyledTextAreaInput.displayName = 'StyledTextAreaInput'
+
 const DeleteIcon = styled(Icon)`
   position: absolute;
   font-size: 16px;
@@ -57,6 +63,8 @@ const DeleteIcon = styled(Icon)`
     cursor: pointer;
   }
 `
+DeleteIcon.displayName = 'DeleteIcon'
+
 const CharacterCounterWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.error};
   padding: 2px 4px;
@@ -69,6 +77,7 @@ const CharacterCounterWrapper = styled.div`
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
 `
+CharacterCounterWrapper.displayName = 'CharacterCounterWrapper'
 
 class IdeaCard extends Component {
   constructor(props) {
