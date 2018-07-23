@@ -24,13 +24,13 @@ class Ideas extends Component {
 
     this.state = {
       ideas: [],
+      isNewIdeaCard: false, // This is to handle focusing a newly added card's title input and not on initial render of fetched ideas
     }
 
     this.handleAddIdea = this.handleAddIdea.bind(this)
   }
 
   componentDidMount() {
-    // just to stop linting errors
     ideasService.find()
       .then(response => this.setState({ ideas: response.data }))
       .catch(err => console.log(err))
@@ -39,21 +39,29 @@ class Ideas extends Component {
   handleAddIdea() {
     const { ideas } = this.state
     ideasService.create({})
-      .then(response => this.setState({ ideas: [response, ...ideas] }))
+      .then((response) => {
+        this.setState({
+          ideas: [response, ...ideas],
+          isNewIdeaCard: true,
+        })
+      })
       .catch(err => console.log(err))
   }
 
   render() {
     const { ideas } = this.state
-
     return (
       <Flex justifyContent="center" alignItems="center" flexDirection="column">
         <StyledHeader>Things I've Thought</StyledHeader>
         <Button primary onClick={this.handleAddIdea}>Add idea</Button>
         <IdeasWrapper justifyContent="center" alignItems="center" flexWrap="wrap" p={4}>
           {
-            map(ideas, idea => (
-              <IdeaCard idea={idea} key={idea._id} />
+            map(ideas, (idea, index) => (
+              <IdeaCard
+                idea={idea}
+                key={idea._id}
+                isNewlyAdded={index === 0 && this.state.isNewIdeaCard}
+              />
             ))
           }
         </IdeasWrapper>

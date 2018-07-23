@@ -64,6 +64,8 @@ class IdeaCard extends Component {
         body: undefined,
       },
     }
+
+    this.titleInput = React.createRef()
   }
 
   componentDidMount() {
@@ -73,6 +75,10 @@ class IdeaCard extends Component {
         body: this.props.idea.body,
       },
     })
+
+    if (this.props.isNewlyAdded) {
+      this.titleInput.current.focus()
+    }
   }
 
   handleSubmit = () => {
@@ -102,6 +108,7 @@ class IdeaCard extends Component {
         >
           <StyledTextInput
             placeholder="Title..."
+            innerRef={this.titleInput}
             value={this.state.idea.title}
             onChange={e => this.setState({
               idea: {
