@@ -17,7 +17,7 @@ $ npm start
 ```
 
 3. Connect the API
-``` 
+```
   Clone and run:  https://github.com/Evanht/bcg-memo-board-api
 ```
 
@@ -26,3 +26,9 @@ $ npm start
   email: evan@mail.com
   password: verysecret
 ```
+
+## Tests
+Tests are written using Jest and Enzyme. To run the test suite:
+```bash
+$ CI=true npm test
+```  
