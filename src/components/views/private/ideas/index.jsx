@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Flex } from 'grid-styled'
-import { map, filter, sortBy, get } from 'lodash'
+import { map, filter } from 'lodash'
 
 import { ideas as ideasService } from 'service/api'
 import { Button, Typography, Feedback, Inputs } from 'components/ui'
@@ -35,7 +34,7 @@ class Ideas extends Component {
       ideas: [],
       isNewIdeaCard: false,
       // Above handles focusing a newly added card's title input and
-      // not on initial render of fetched ideas
+      // makes sure does not focus any inputs when component first mounts
     }
 
     this.handleAddIdea = this.handleAddIdea.bind(this)

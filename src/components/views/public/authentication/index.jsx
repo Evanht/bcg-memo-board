@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { noop } from 'lodash'
 import { Route, Switch } from 'react-router-dom'
-import { Flex, Box } from 'grid-styled'
+import { Flex } from 'grid-styled'
 import styled from 'styled-components'
 
 import Login from './login'
@@ -13,17 +13,15 @@ const AuthenticationWrapper = styled(Flex)`
   height: 100vh;
 `
 
-const Authentication = (props) => {
-  return (
-    <AuthenticationWrapper justifyContent="center" alignItems="center" p={4} >
-      <Switch>
-        <Route path="/login" component={() => <Login {...props} />} />
-        <Route path="/register" component={Register} />
-        <Route path="/" component={Register} />
-      </Switch>
-    </AuthenticationWrapper>
-  )
-}
+const Authentication = props => (
+  <AuthenticationWrapper justifyContent="center" alignItems="center" p={4} >
+    <Switch>
+      <Route path="/login" component={() => <Login {...props} />} />
+      <Route path="/register" component={Register} />
+      <Route path="/" component={Register} />
+    </Switch>
+  </AuthenticationWrapper>
+)
 
 Authentication.propTypes = {
   toggleLoggedIn: PropTypes.func,

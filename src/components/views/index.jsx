@@ -1,8 +1,5 @@
-// Put Public/Private routing here. To do it without redux
-// here we will have a component which handles authentication
 import React, { Component } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import styled from 'styled-components'
 
 import api from 'service/api'
 import Public from './public'

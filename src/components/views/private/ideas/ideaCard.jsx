@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { capitalize, get } from 'lodash'
+import { capitalize, get, noop } from 'lodash'
 
-import { Inputs, Icon, Feedback, Button } from 'components/ui'
+import { Inputs, Icon, Feedback } from 'components/ui'
 import { ideas as ideasService } from 'service/api'
 
 const { Text } = Inputs
@@ -79,6 +79,7 @@ const CharacterCounterWrapper = styled.div`
 `
 CharacterCounterWrapper.displayName = 'CharacterCounterWrapper'
 
+
 class IdeaCard extends Component {
   constructor(props) {
     super(props)
@@ -105,7 +106,7 @@ class IdeaCard extends Component {
         title: this.props.idea.title,
         body: this.props.idea.body,
       },
-      bodyCharacterCounter: get(this.props.idea, 'body.length', 0)
+      bodyCharacterCounter: get(this.props.idea, 'body.length', 0),
     })
 
     if (this.props.isNewlyAdded) {
@@ -187,6 +188,22 @@ class IdeaCard extends Component {
       </Spin>
     )
   }
+}
+
+IdeaCard.propTypes = {
+  removeIdea: PropTypes.func,
+  idea: PropTypes.shape({
+    _id: PropTypes.string,
+    title: PropTypes.string,
+    body: PropTypes.string,
+  }),
+  isNewlyAdded: PropTypes.bool,
+}
+
+IdeaCard.defaultProps = {
+  removeIdea: noop,
+  idea: {},
+  isNewlyAdded: false,
 }
 
 export default IdeaCard
