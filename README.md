@@ -17,8 +17,10 @@ $ npm start
 ```
 
 3. Connect the API
- Clone and run: https://github.com/Evanht/bcg-memo-board-api
+`Clone and run: https://github.com/Evanht/bcg-memo-board-api`
 
-4. Try logging in to check that the API is connected
+4. Visit localhost:3000 and try logging in to check that the API is connected
+```
   email: evan@mail.com
   password: verysecret
+```
