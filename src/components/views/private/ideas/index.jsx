@@ -8,11 +8,15 @@ import { ideas as ideasService } from 'service/api'
 import { Button, Typography, Feedback, Inputs } from 'components/ui'
 import IdeaCard from './ideaCard'
 
+IdeaCard.displayName = 'IdeaCard' // So can .find('IdeaCard') in enzyme tests
+Button.displayName = 'Button'
+
 const { Headers } = Typography
 const { Message } = Feedback
 const { Select } = Inputs
 
 const IdeasWrapper = styled(Flex)``
+IdeasWrapper.displayName = 'IdeasWrapper'
 
 const StyledHeader = styled(Headers.H2)`
   text-align: center;
@@ -21,6 +25,7 @@ const StyledHeader = styled(Headers.H2)`
 const StyledSelect = styled(Select)`
   width: 120px;
 `
+StyledSelect.displayName = 'StyledSelect'
 
 class Ideas extends Component {
   constructor(props) {
