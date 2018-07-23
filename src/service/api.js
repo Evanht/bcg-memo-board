@@ -4,7 +4,9 @@ import auth from 'feathers-authentication-client'
 import io from 'socket.io-client'
 import hooks from 'feathers-hooks'
 
-const socket = io(process.env.API || 'http://localhost:3030')
+// const socket = io('http://localhost:3030') // Dev
+const socket = io('https://ideaboard-bcgdv-api.herokuapp.com/') // Production
+
 const storage = process.env.TYPE = 'CLIENT' ? window.localStorage : null
 
 const api = feathers()
