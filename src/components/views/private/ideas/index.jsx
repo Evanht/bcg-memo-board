@@ -81,7 +81,7 @@ class Ideas extends Component {
     const { ideas } = this.state
     return (
       <Flex justifyContent="center" alignItems="center" flexDirection="column">
-        <StyledHeader>My Best Thoughts</StyledHeader>
+        <StyledHeader>My {this.state.ideas.length} Best Thoughts</StyledHeader>
         <Flex>
           <Button primary onClick={this.handleAddIdea}>Add idea</Button>
           <StyledSelect placeholder="Sort by..." onChange={value => this.handleFetchSortedIdeas(value)}>
