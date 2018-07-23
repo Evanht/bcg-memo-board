@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { capitalize } from 'lodash'
 
 import { Inputs, Icon, Feedback, Button } from 'components/ui'
 import { ideas as ideasService } from 'service/api'
@@ -36,6 +37,7 @@ const StyledTextAreaInput = styled(Text.TextArea)`
     border: none;
     resize: none;
     border-radius: 0px;
+    height: 90px;
   }
 
   &&:focus {
@@ -44,11 +46,15 @@ const StyledTextAreaInput = styled(Text.TextArea)`
     border-radius: 3px;
   }
 `
-const StyledButton = styled(Button)`
-  &&.ant-btn {
-    border: none;
-    color: white;
-    margin-top: 10px;
+const DeleteIcon = styled(Icon)`
+  position: absolute;
+  font-size: 16px;
+  top: -5px;
+  right: -5px;
+  color: ${({ theme }) => theme.colors.error};
+
+  &:hover {
+    cursor: pointer;
   }
 `
 
@@ -89,7 +95,7 @@ class IdeaCard extends Component {
         this.setState({ loading: false })
       })
       .catch((err) => {
-        Message.error(err)
+        console.log(err)
         this.setState({ loading: false })
       })
   }
@@ -106,30 +112,42 @@ class IdeaCard extends Component {
           onFocus={() => this.setState({ ...this.state, showDeleteIcon: true })}
           onBlur={() => this.setState({ ...this.state, showDeleteIcon: false })}
         >
+          {this.state.showDeleteIcon && (
+            <DeleteIcon
+              type="close-circle-o"
+              onClick={() => this.props.removeIdea(this.props.idea._id)}
+            />
+          )}
           <StyledTextInput
             placeholder="Title..."
             innerRef={this.titleInput}
             value={this.state.idea.title}
-            onChange={e => this.setState({
-              idea: {
-                ...this.state.idea,
-                title: e.target.value,
-              },
-            })}
+            onChange={(event) => {
+              const title = capitalize(event.target.value)
+              this.setState({
+                idea: {
+                  ...this.state.idea,
+                  title,
+                },
+              })
+            }}
             onBlur={this.handleSubmit}
           />
           <StyledTextAreaInput
             placeholder="Body..."
             value={this.state.idea.body}
-            onChange={e => this.setState({
-              idea: {
-                ...this.state.idea,
-                body: e.target.value,
-              },
-            })}
+            onChange={(event) => {
+              const body = capitalize(event.target.value)
+              this.setState({
+                idea: {
+                  ...this.state.idea,
+                  body,
+                },
+              })
+            }}
             onBlur={this.handleSubmit}
           />
-          {this.state.showDeleteIcon && (
+          {/* {this.state.showDeleteIcon && (
             <StyledButton
               danger
               fullWidth
@@ -138,7 +156,7 @@ class IdeaCard extends Component {
             >
               Remove Idea
             </StyledButton>
-          )}
+          )} */}
         </IdeaCardWrapper>
       </Spin>
     )

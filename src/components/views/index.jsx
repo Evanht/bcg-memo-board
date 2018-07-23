@@ -33,7 +33,6 @@ class App extends Component {
   }
 
   toggleLoggedIn() {
-    console.log("Logging in")
     this.setState({
       isLoggedIn: !this.state.isLoggedIn,
     })

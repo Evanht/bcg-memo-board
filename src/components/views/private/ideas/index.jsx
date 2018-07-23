@@ -1,21 +1,25 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Flex, Box } from 'grid-styled'
-import { map } from 'lodash'
+import { Flex } from 'grid-styled'
+import { map, filter, sortBy, get } from 'lodash'
 
 import { ideas as ideasService } from 'service/api'
-import { Button, Typography } from 'components/ui'
+import { Button, Typography, Feedback, Inputs } from 'components/ui'
 import IdeaCard from './ideaCard'
 
 const { Headers } = Typography
+const { Message } = Feedback
+const { Select } = Inputs
 
-const IdeasWrapper = styled(Flex)`
-  ${'' /* padding: 20px; */}
-`
+const IdeasWrapper = styled(Flex)``
+
 const StyledHeader = styled(Headers.H2)`
   text-align: center;
   padding: 20px 0px;
+`
+const StyledSelect = styled(Select)`
+  width: 200px;
 `
 
 class Ideas extends Component {
@@ -24,10 +28,13 @@ class Ideas extends Component {
 
     this.state = {
       ideas: [],
-      isNewIdeaCard: false, // This is to handle focusing a newly added card's title input and not on initial render of fetched ideas
+      isNewIdeaCard: false,
+      // Above handles focusing a newly added card's title input and
+      // not on initial render of fetched ideas
     }
 
     this.handleAddIdea = this.handleAddIdea.bind(this)
+    this.handleRemoveIdea = this.handleRemoveIdea.bind(this)
   }
 
   componentDidMount() {
@@ -48,19 +55,55 @@ class Ideas extends Component {
       .catch(err => console.log(err))
   }
 
+  handleRemoveIdea(ideaId) {
+    ideasService.remove(ideaId)
+      .then(() => {
+        this.setState({
+          ideas: filter(this.state.ideas, idea => idea._id !== ideaId),
+        })
+        Message.success('Idea removed!')
+      })
+      .catch(err => console.log(err))
+  }
+
+  handleFetchSortedIdeas(sort) {
+    ideasService.find({
+      query: {
+        $sort: {
+          [sort]: 1,
+        },
+      },
+    })
+      .then((response) => {
+        console.log(response)
+        this.setState({ ideas: response.data })
+      })
+    // console.log("Sorting by:", sort)
+    // this.setState({
+    //   ideas: sortBy(this.state.ideas, [idea => !idea[sort]]),
+    // })
+  }
+
   render() {
     const { ideas } = this.state
     return (
       <Flex justifyContent="center" alignItems="center" flexDirection="column">
-        <StyledHeader>Things I've Thought</StyledHeader>
-        <Button primary onClick={this.handleAddIdea}>Add idea</Button>
-        <IdeasWrapper justifyContent="center" alignItems="center" flexWrap="wrap" p={4}>
+        <StyledHeader>Things I Have Thought</StyledHeader>
+        <Flex>
+          <Button primary onClick={this.handleAddIdea}>Add idea</Button>
+          <StyledSelect defaultValue="createdAt" onChange={value => this.handleFetchSortedIdeas(value)}>
+            <Select.Option value="title">Title</Select.Option>
+            <Select.Option value="createdAt">Created at</Select.Option>
+          </StyledSelect>
+        </Flex>
+        <IdeasWrapper justifyContent="center" alignItems="center" flexWrap="wrap" p={[1, 4]}>
           {
             map(ideas, (idea, index) => (
               <IdeaCard
                 idea={idea}
                 key={idea._id}
                 isNewlyAdded={index === 0 && this.state.isNewIdeaCard}
+                removeIdea={this.handleRemoveIdea}
               />
             ))
           }
