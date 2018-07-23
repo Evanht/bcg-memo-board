@@ -18,7 +18,7 @@ const Authentication = props => (
     <Switch>
       <Route path="/login" component={() => <Login {...props} />} />
       <Route path="/register" component={Register} />
-      <Route path="/" component={Register} />
+      <Route path="/" component={() => <Login {...props} />} />
     </Switch>
   </AuthenticationWrapper>
 )

@@ -13,7 +13,7 @@ const StyledForm = styled.form`
   box-shadow: ${({ theme }) => theme.shadow.flat};
   padding: 20px;
   border-radius: 2px;
-  width: 400px;
+  width: 300px;
 `
 const FormItem = styled.div`
   margin-top: 10px;
@@ -45,8 +45,6 @@ class Login extends Component {
       .then(({ accessToken }) => {
         api.passport.verifyJWT(accessToken)
           .then((response) => {
-            console.log('RESPONSE', response)
-            console.log(this.props.toggleLoggedIn)
             response.userId && this.props.toggleLoggedIn()
           })
           .catch(err => console.log('Error:', err))
