@@ -8,10 +8,6 @@ import api from 'service/api'
 import Public from './public'
 import Private from './private'
 
-const AppWrapper = styled.div`
-  background: red;
-`
-
 class App extends Component {
   constructor(props) {
     super(props)
@@ -37,7 +33,6 @@ class App extends Component {
   }
 
   toggleLoggedIn() {
-    console.log("Logging in")
     this.setState({
       isLoggedIn: !this.state.isLoggedIn,
     })

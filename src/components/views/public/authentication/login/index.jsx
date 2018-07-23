@@ -44,7 +44,7 @@ class Login extends Component {
     })
       .then(({ accessToken }) => {
         api.passport.verifyJWT(accessToken)
-          .then(response => {
+          .then((response) => {
             console.log('RESPONSE', response)
             console.log(this.props.toggleLoggedIn)
             response.userId && this.props.toggleLoggedIn()
