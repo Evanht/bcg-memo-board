@@ -1,9 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { ThemeProvider, injectGlobal } from 'styled-components'
+
 import App from './components'
 import registerServiceWorker from './registerServiceWorker'
 import theme from './theme'
+
 
 // GLOBAL STYLES
 injectGlobal`
