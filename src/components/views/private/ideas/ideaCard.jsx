@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { capitalize } from 'lodash'
+import { capitalize, get } from 'lodash'
 
 import { Inputs, Icon, Feedback, Button } from 'components/ui'
 import { ideas as ideasService } from 'service/api'
@@ -57,6 +57,18 @@ const DeleteIcon = styled(Icon)`
     cursor: pointer;
   }
 `
+const CharacterCounterWrapper = styled.div`
+  background-color: ${({ theme }) => theme.colors.error};
+  padding: 2px 4px;
+  color: white;
+  position: absolute;
+  bottom: -20px;
+  left: 9px;
+  right: 9px;
+  text-align: center;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+`
 
 class IdeaCard extends Component {
   constructor(props) {
@@ -69,9 +81,13 @@ class IdeaCard extends Component {
         title: undefined,
         body: undefined,
       },
+      bodyCharacterCounter: 0,
+      bodyIsActive: false,
     }
 
     this.titleInput = React.createRef()
+
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -80,6 +96,7 @@ class IdeaCard extends Component {
         title: this.props.idea.title,
         body: this.props.idea.body,
       },
+      bodyCharacterCounter: get(this.props.idea, 'body.length', 0)
     })
 
     if (this.props.isNewlyAdded) {
@@ -87,12 +104,12 @@ class IdeaCard extends Component {
     }
   }
 
-  handleSubmit = () => {
+  handleSubmit() {
     this.setState({ loading: true })
     ideasService.patch(this.props.idea._id, this.state.idea)
       .then(() => {
         Message.success('Idea updated!')
-        this.setState({ loading: false })
+        this.setState({ loading: false, bodyIsActive: false })
       })
       .catch((err) => {
         console.log(err)
@@ -100,11 +117,16 @@ class IdeaCard extends Component {
       })
   }
 
-  // handleRemoveIdea
-
   render() {
     return (
       <Spin spinning={this.state.loading}>
+        {
+          this.state.bodyIsActive && this.state.bodyCharacterCounter > 135 && (
+            <CharacterCounterWrapper>
+              {150 - this.state.bodyCharacterCounter} characters left!
+            </CharacterCounterWrapper>
+          )
+        }
         <IdeaCardWrapper
           onMouseOver={() => this.setState({ ...this.state, showDeleteIcon: true })}
           onMouseLeave={() => this.setState({ ...this.state, showDeleteIcon: false })}
@@ -125,6 +147,7 @@ class IdeaCard extends Component {
             onChange={(event) => {
               const title = capitalize(event.target.value)
               this.setState({
+                ...this.state,
                 idea: {
                   ...this.state.idea,
                   title,
@@ -135,28 +158,22 @@ class IdeaCard extends Component {
           />
           <StyledTextAreaInput
             placeholder="Body..."
+            maxLength="150"
             value={this.state.idea.body}
+            onBlur={this.handleSubmit}
             onChange={(event) => {
               const body = capitalize(event.target.value)
               this.setState({
+                ...this.state,
                 idea: {
                   ...this.state.idea,
                   body,
                 },
+                bodyCharacterCounter: body.length,
+                bodyIsActive: true,
               })
             }}
-            onBlur={this.handleSubmit}
           />
-          {/* {this.state.showDeleteIcon && (
-            <StyledButton
-              danger
-              fullWidth
-              icon="close-circle-o"
-              // onClick={() => ideasService.remove(this.props.idea._id)}
-            >
-              Remove Idea
-            </StyledButton>
-          )} */}
         </IdeaCardWrapper>
       </Spin>
     )

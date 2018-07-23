@@ -19,7 +19,7 @@ const StyledHeader = styled(Headers.H2)`
   padding: 20px 0px;
 `
 const StyledSelect = styled(Select)`
-  width: 200px;
+  width: 120px;
 `
 
 class Ideas extends Component {
@@ -74,24 +74,17 @@ class Ideas extends Component {
         },
       },
     })
-      .then((response) => {
-        console.log(response)
-        this.setState({ ideas: response.data })
-      })
-    // console.log("Sorting by:", sort)
-    // this.setState({
-    //   ideas: sortBy(this.state.ideas, [idea => !idea[sort]]),
-    // })
+      .then(response => this.setState({ ideas: response.data }))
   }
 
   render() {
     const { ideas } = this.state
     return (
       <Flex justifyContent="center" alignItems="center" flexDirection="column">
-        <StyledHeader>Things I Have Thought</StyledHeader>
+        <StyledHeader>My Best Thoughts</StyledHeader>
         <Flex>
           <Button primary onClick={this.handleAddIdea}>Add idea</Button>
-          <StyledSelect defaultValue="createdAt" onChange={value => this.handleFetchSortedIdeas(value)}>
+          <StyledSelect placeholder="Sort by..." onChange={value => this.handleFetchSortedIdeas(value)}>
             <Select.Option value="title">Title</Select.Option>
             <Select.Option value="createdAt">Created at</Select.Option>
           </StyledSelect>
