@@ -31,6 +31,8 @@ const StyledTextInput = styled(Text)`
     border-radius: 3px;
   }
 `
+StyledTextInput.displayName = 'StyledTextInput'
+
 const StyledTextAreaInput = styled(Text.TextArea)`
   && {
     margin-bottom: 10px
@@ -46,6 +48,8 @@ const StyledTextAreaInput = styled(Text.TextArea)`
     border-radius: 3px;
   }
 `
+StyledTextAreaInput.displayName = 'StyledTextAreaInput'
+
 const DeleteIcon = styled(Icon)`
   position: absolute;
   font-size: 16px;
