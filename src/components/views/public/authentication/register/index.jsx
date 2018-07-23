@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
+// TODO implement registration page - at moment make accounts via curl.
 
 class Register extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      email: '',
-      password: '',
+      email: undefined,
+      password: undefined,
     }
   }
 

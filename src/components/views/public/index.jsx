@@ -6,13 +6,12 @@ import { Route, Switch } from 'react-router-dom'
 
 import Authentication from './authentication'
 
-const Public = (props) => {
-  return (
-    <Switch>
-      <Route path="/" component={() => <Authentication {...props} />} />
-    </Switch>
-  )
-}
+const Public = props => (
+  <Switch>
+    <Route path="/" component={() => <Authentication {...props} />} />
+    {/* Any other public routing would go here - like About page, Team page, etc. */}
+  </Switch>
+)
 
 Public.propTypes = {
   toggleLoggedIn: PropTypes.func,
