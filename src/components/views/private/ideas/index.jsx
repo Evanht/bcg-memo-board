@@ -90,7 +90,7 @@ class Ideas extends Component {
     return (
       <Flex justifyContent="center" alignItems="center">
         <PageWrapper justifyContent="center" alignItems="center" flexDirection="column">
-          <StyledHeader>My {this.state.ideas.length} Best Thoughts</StyledHeader>
+          <StyledHeader>The World's {this.state.ideas.length} Best Thoughts</StyledHeader>
           <Flex>
             <Button primary onClick={this.handleAddIdea}>Add idea</Button>
             <StyledSelect placeholder="Sort by..." onSelect={value => this.handleFetchSortedIdeas(value)}>
