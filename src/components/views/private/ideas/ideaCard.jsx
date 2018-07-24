@@ -16,6 +16,7 @@ const IdeaCardWrapper = styled.div`
   height: 150px;
   margin: 10px;
   padding: 10px;
+  z-index: 2;
 `
 IdeaCardWrapper.displayName = 'IdeaCardWrapper'
 
@@ -76,6 +77,7 @@ const CharacterCounterWrapper = styled.div`
   text-align: center;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
+  z-index: 0;
 `
 CharacterCounterWrapper.displayName = 'CharacterCounterWrapper'
 
