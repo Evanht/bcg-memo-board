@@ -32,8 +32,8 @@ describe('<Ideas />', () => {
     expect(wrapper.find('Button').props().onClick).toBeDefined()
   })
 
-  it('Select dropdwon takes a function onChange', () => {
+  it('Select dropdwon takes a function onSelect', () => {
     const wrapper = shallow(<Ideas />)
-    expect(wrapper.find('StyledSelect').props().onChange).toBeDefined()
+    expect(wrapper.find('StyledSelect').props().onSelect).toBeDefined()
   })
 })

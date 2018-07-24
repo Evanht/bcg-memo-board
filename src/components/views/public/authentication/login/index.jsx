@@ -64,36 +64,38 @@ class Login extends Component {
 
   render() {
     return (
-      <Spin spinning={this.state.loading}>
-        <StyledForm onSubmit={this.handleSubmit}>
-          <FormHeader> Welcome back! </FormHeader>
-          <FormItem>
-            <Text
-              onChange={e => this.setState({
-               email: e.target.value,
-              })}
-              placeholder="email"
-              htmlType="email"
-              prefix={<Icon type="mail" />}
-            />
-          </FormItem>
-          <FormItem>
-            <Text
-              onChange={e => this.setState({
-               password: e.target.value,
-              })}
-              placeholder="********"
-              type="password"
-              prefix={<Icon type="lock" />}
-            />
-          </FormItem>
-          <FormItem>
-            <Button fullWidth htmlType="submit" primary>
-              Login
-            </Button>
-          </FormItem>
-        </StyledForm>
-      </Spin>
+      <div>
+        <Spin spinning={this.state.loading}>
+          <StyledForm onSubmit={this.handleSubmit}>
+            <FormHeader> Welcome back! </FormHeader>
+            <FormItem>
+              <Text
+                onChange={e => this.setState({
+                 email: e.target.value.toLowerCase(),
+                })}
+                placeholder="email"
+                htmlType="email"
+                prefix={<Icon type="mail" />}
+              />
+            </FormItem>
+            <FormItem>
+              <Text
+                onChange={e => this.setState({
+                 password: e.target.value,
+                })}
+                placeholder="********"
+                type="password"
+                prefix={<Icon type="lock" />}
+              />
+            </FormItem>
+            <FormItem>
+              <Button fullWidth htmlType="submit" primary>
+                Login
+              </Button>
+            </FormItem>
+          </StyledForm>
+        </Spin>
+      </div>
     )
   }
 }

@@ -14,6 +14,10 @@ const { Headers } = Typography
 const { Message } = Feedback
 const { Select } = Inputs
 
+const PageWrapper = styled(Flex)`
+  max-width: 900px;
+`
+
 const IdeasWrapper = styled(Flex)``
 IdeasWrapper.displayName = 'IdeasWrapper'
 
@@ -74,7 +78,7 @@ class Ideas extends Component {
     ideasService.find({
       query: {
         $sort: {
-          [sort]: 1,
+          [sort]: sort === 'title' ? 1 : -1, // sort title from A-Z and createdAt most recent first
         },
       },
     })
@@ -84,27 +88,29 @@ class Ideas extends Component {
   render() {
     const { ideas } = this.state
     return (
-      <Flex justifyContent="center" alignItems="center" flexDirection="column">
-        <StyledHeader>My {this.state.ideas.length} Best Thoughts</StyledHeader>
-        <Flex>
-          <Button primary onClick={this.handleAddIdea}>Add idea</Button>
-          <StyledSelect placeholder="Sort by..." onChange={value => this.handleFetchSortedIdeas(value)}>
-            <Select.Option value="title">Title</Select.Option>
-            <Select.Option value="createdAt">Created at</Select.Option>
-          </StyledSelect>
-        </Flex>
-        <IdeasWrapper justifyContent="center" alignItems="center" flexWrap="wrap" p={[1, 4]}>
-          {
-            map(ideas, (idea, index) => (
-              <IdeaCard
-                idea={idea}
-                key={idea._id}
-                isNewlyAdded={index === 0 && this.state.isNewIdeaCard}
-                removeIdea={this.handleRemoveIdea}
-              />
-            ))
-          }
-        </IdeasWrapper>
+      <Flex justifyContent="center" alignItems="center">
+        <PageWrapper justifyContent="center" alignItems="center" flexDirection="column">
+          <StyledHeader>My {this.state.ideas.length} Best Thoughts</StyledHeader>
+          <Flex>
+            <Button primary onClick={this.handleAddIdea}>Add idea</Button>
+            <StyledSelect placeholder="Sort by..." onSelect={value => this.handleFetchSortedIdeas(value)}>
+              <Select.Option value="title">Title</Select.Option>
+              <Select.Option value="createdAt">Created at</Select.Option>
+            </StyledSelect>
+          </Flex>
+          <IdeasWrapper justifyContent="center" alignItems="center" flexWrap="wrap" p={[1, 4]}>
+            {
+              map(ideas, (idea, index) => (
+                <IdeaCard
+                  idea={idea}
+                  key={idea._id}
+                  isNewlyAdded={index === 0 && this.state.isNewIdeaCard}
+                  removeIdea={this.handleRemoveIdea}
+                />
+              ))
+            }
+          </IdeasWrapper>
+        </PageWrapper>
       </Flex>
     )
   }
