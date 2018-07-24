@@ -25,6 +25,10 @@ It should work out of the box, but follow step 4 to make sure.
   email: evan@mail.com
   password: verysecret
 ```
+If you want to create your own user that you can login with then you can use curl
+```bash
+curl 'https://ideaboard-bcgdv-api.herokuapp.com/users' -H 'Content-Type: application/json' --data-binary '{ "email": "<YOUR_EMAIL>", "password": "<YOUR_PASSWORD>" }'
+```
 
 ## Tests
 Tests are written using Jest and Enzyme. To run the test suite:  

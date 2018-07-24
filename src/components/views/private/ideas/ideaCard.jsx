@@ -172,7 +172,7 @@ class IdeaCard extends Component {
             value={this.state.idea.body}
             onBlur={this.handleSubmit}
             onChange={(event) => {
-              const body = capitalize(event.target.value)
+              const body = event.target.value
               this.setState({
                 ...this.state,
                 idea: {
