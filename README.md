@@ -5,8 +5,8 @@ This app connects to an API to handle authentication and the creating, fetching,
 
 ## Getting Started
 
-1. Create a .env file in the project's root and set:
-`NODE_PATH=src/`
+1. Create a .env file in the project's root and set:  
+`NODE_PATH=src/`  
 This allows for absolute imports, rather than messy relative ones from deep down components.
 
 
@@ -16,7 +16,7 @@ $ npm install
 $ npm start
 ```
 
-3. Connect the API
+3. Connect the API  
 ```
   Clone and run:  https://github.com/Evanht/bcg-memo-board-api
 ```
@@ -28,7 +28,7 @@ $ npm start
 ```
 
 ## Tests
-Tests are written using Jest and Enzyme. To run the test suite:
+Tests are written using Jest and Enzyme. To run the test suite:  
 ```bash
 $ CI=true npm test
 ```  
