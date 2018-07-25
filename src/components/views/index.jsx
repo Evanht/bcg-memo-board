@@ -26,7 +26,7 @@ class App extends Component {
           }))
           .catch(err => console.log(err))
       })
-      .catch(err => console.log(`Not logged in mate: ${err}`))
+      .catch(err => console.log(`Not logged in: ${err}`))
   }
 
   toggleLoggedIn() {

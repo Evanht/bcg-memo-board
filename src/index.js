@@ -6,8 +6,7 @@ import App from './components'
 import registerServiceWorker from './registerServiceWorker'
 import theme from './theme'
 
-
-// GLOBAL STYLES
+/* eslint-disable */
 injectGlobal`
   body {
     font-family: ${theme.fonts.default} !important;
@@ -16,20 +15,11 @@ injectGlobal`
     background-color: white;
     margin: 0px;
   }
-  .ant-checkbox-group label {
-    color: ${theme.colors.text} !important;
-  }
   p {
     color: ${theme.colors.text};
   }
   h1, h2, h3, h4, h5, h6 {
     color: ${theme.colors.text};
-  }
-  a {
-    color: ${theme.colors.primary};
-  }
-  a:hover {
-    color: white !important;
   }
   ::selection {
     background: ${theme.colors.primary};
@@ -49,10 +39,12 @@ injectGlobal`
   }
 `
 
+
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <App />
   </ThemeProvider>
   , document.getElementById('root'),
 )
+/* eslint-enable */
 registerServiceWorker()
